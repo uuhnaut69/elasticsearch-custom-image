@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: uuhnaut69/elasticsearch:7.14.1
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=testpwd123
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=true
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  kibana:
+    container_name: kibana
+    image: kibana:7.14.1
+    environment:
+      - xpack.security.enabled=true
+      - ELASTICSEARCH_URL=elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=testpwd123
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
