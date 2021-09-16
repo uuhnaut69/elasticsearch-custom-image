@@ -8,6 +8,7 @@ services:
       - discovery.type=single-node
       - ELASTIC_PASSWORD=testpwd123
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.license.self_generated.type=trial
       - xpack.security.enabled=true
     ports:
       - "9200:9200"
